@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { BsCheckCircle } from "react-icons/bs";
-import { FaCheckSquare, FaRegCheckSquare } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
 type Note = {
@@ -16,19 +14,16 @@ export default function NoteApp() {
   const [loading, setLoading] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Load notes from localStorage
   useEffect(() => {
-    const storedNotes = localStorage.getItem("cwpslxck/basicnote");
+    const storedNotes = localStorage.getItem("note");
     if (storedNotes) setNotes(JSON.parse(storedNotes));
     setLoading(false);
   }, []);
 
-  // Save notes to localStorage
   useEffect(() => {
-    localStorage.setItem("cwpslxck/basicnote", JSON.stringify(notes));
+    localStorage.setItem("note", JSON.stringify(notes));
   }, [notes]);
 
-  // Scroll to bottom when notes change
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
